@@ -134,3 +134,28 @@ Be cautious when running terraform apply in a production environment, as it can 
 This will destroy resources 
 
 you can also use the -auto-approve 
+
+## Issues with terraform Cloud login and Gitpod Workspace
+
+When attempting to run `terrform login` it will launch bash a wiswig view to generat a token.
+However it does not work as expected in Gitpod VsCode in the browser.
+
+The workaround is to manually generate a token .
+After creating a file manually .
+And open the file 
+
+
+```sh
+touch /home/gitpod/.terraform.d/credentials.tfrc.json
+open /home/gitpod/.terraform.d/credentials.tfrc.json
+
+```
+```json
+{
+  "credentials": {
+    "app.terraform.io": {
+      "token": "F2aaIh5eOhAYcc.atlasv1.7775NOPEzo82qN88elI0qgbcyu3Jr0N4rluUqzIHEgsNf5uRxPfJ7DiV3QzwEXoNOPE"
+    }
+  }
+}
+```
