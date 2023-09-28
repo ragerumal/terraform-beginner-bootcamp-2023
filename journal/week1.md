@@ -73,3 +73,47 @@ We can use the `var` flag to set an input variable or overide a variable in the 
 If someone goes and delete or modifies cloud resource manually Clickops.
 
 If we run Terrform Plan is with attempt to put our Infrastructre back in to the expected state fixing Configuration Drift.
+
+## Fix using Terraform Refresh
+
+```sh
+terraform apply -refresh-only -auto-approve
+```
+
+## Terraform Modules 
+
+### Terraform Module Structure
+
+It is recommended to place modules in a `modules` directory when developing modules but you can name it what ever you like.
+
+### Passing input variables
+
+We can pass input variables to our modules
+
+The module has to declare the terraform variables in its own variables.tf 
+
+```tf
+module "terrahouse_aws" {
+  source = "./modules/terrahouse_aws"
+  user_uuid= var.user_uuid
+  bucket_name = var.bucket_name
+}
+```
+
+### Module sources 
+
+Using the source we can import the module from various places 
+- Locally
+- Github 
+- Terraform Registroy 
+
+
+```tf
+module "terrahouse_aws" {
+  source = "./modules/terrahouse_aws"
+  user_uuid= var.user_uuid
+  bucket_name = var.bucket_name
+}
+```
+
+[Module Sources](https://developer.hashicorp.com/terraform/language/modules/sources)
