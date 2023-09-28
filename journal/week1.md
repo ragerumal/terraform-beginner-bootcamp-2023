@@ -50,3 +50,26 @@ We can use the `var` flag to set an input variable or overide a variable in the 
  ### order of terraform variables
 
  - TODO : document which terraform variables takes precedence.
+
+
+ ### Dealing with configuration Drift
+ 
+ ## What happens if we loose our State file ?
+
+ If you loose your state file, you most likey have to tear down all your cloud infra manually. You can use terraform port but it wont for all cloud resources. you need to check the terraform providers documentation for which resources support import.
+ 
+
+ ## Fix missing Resources wuth Terraform Import
+
+`terraform import aws_s3_bucket.bucket bucket-name`
+
+[Terraform Import](https://developer.hashicorp.com/terraform/language/import)
+
+[AWS S3 Bucket import](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#import)
+
+
+### Fix manual Configuration
+
+If someone goes and delete or modifies cloud resource manually Clickops.
+
+If we run Terrform Plan is with attempt to put our Infrastructre back in to the expected state fixing Configuration Drift.
