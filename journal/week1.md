@@ -229,3 +229,56 @@ resource "terraform_data" "replacement" {
 }
 ```
 [The terraform_data Managed Resource Type](https://developer.hashicorp.com/terraform/language/resources/terraform-data)
+
+## Provisioners 
+
+Provisioners allow you to execute commands on compute instances e.g . a AWS CLI command
+
+They are not recommended for use by Hashicorp becoz configuration management tools such as Ansible are a better fit, but the functionality exists.
+
+[Provisioners are a Last Resort](https://developer.hashicorp.com/terraform/language/resources/provisioners/syntax)
+
+### Local-exec
+
+This will execute a command on the machine running the terraform commands. eg. Plan apply
+
+```tf
+resource "aws_instance" "web" {
+  # ...
+
+  provisioner "local-exec" {
+    command = "echo ${self.private_ip} >> private_ips.txt"
+  }
+}
+
+```
+
+[local-exec Provisioner](https://developer.hashicorp.com/terraform/language/resources/provisioners/local-exec)
+### Remote-exec
+
+This will execute commands on a machine which you target, You will need to provide cred such as ssh to get in to the machine.
+
+```tf
+resource "aws_instance" "web" {
+  # ...
+
+  # Establishes connection to be used by all
+  # generic remote provisioners (i.e. file/remote-exec)
+  connection {
+    type     = "ssh"
+    user     = "root"
+    password = var.root_password
+    host     = self.public_ip
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "puppet apply",
+      "consul join ${aws_instance.web.private_ip}",
+    ]
+  }
+}
+
+```
+
+[remote-exec Provisioner](https://developer.hashicorp.com/terraform/language/resources/provisioners/remote-exec)
