@@ -283,7 +283,21 @@ resource "aws_instance" "web" {
 
 [remote-exec Provisioner](https://developer.hashicorp.com/terraform/language/resources/provisioners/remote-exec)
 
+## Setup Http-server npm
 
+Updates in Gitpod.yml
+```tf
+- name: http-server
+    before: |
+      npm install --global http-server
+    command : 
+     http-server
+```
+
+```tf
+http-server: a simple static HTTP server
+```
+[http-server: a simple static HTTP server](https://www.npmjs.com/package/http-server)
 ## For each expreassions
 
 For each allows us to enumerate over complex data types 
