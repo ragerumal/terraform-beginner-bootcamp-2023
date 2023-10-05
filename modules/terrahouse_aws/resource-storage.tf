@@ -35,12 +35,12 @@ resource "aws_s3_object" "index_html" {
 resource "aws_s3_object" "error_html" {
   bucket = aws_s3_bucket.website_bucket.bucket
   key    = "error.html"
-  source = ${path.root}${var.error_html_filepath}
+  source = "${path.root}${var.error_html_filepath}"
   content_type = "text/html"
 
 
   # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
-    etag = "${md5(file("${path.root}${var.error_html_filepath}"))}"
+    etag = "${md5(file("${path.root}/${var.error_html_filepath}"))}"
   #etag = filemd5("path/to/file")
 }
 
