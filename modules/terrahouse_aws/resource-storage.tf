@@ -2,7 +2,7 @@ resource "aws_s3_bucket" "website_bucket" {
 bucket = var.bucket_name
   tags = {
       UserUuid = var.user_uuid
-      Hello = "World"
+      Hello = "Mars"
     }
 }
 
@@ -25,22 +25,22 @@ resource "aws_s3_bucket_website_configuration" "website_configuration" {
 resource "aws_s3_object" "index_html" {
   bucket = aws_s3_bucket.website_bucket.bucket
   key    = "index.html"
-  source = var.index_html_filepath
+  source = "${path.root}${var.index_html_filepath}"
   content_type = "text/html"
   # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
-    etag = "${md5(file(var.index_html_filepath))}"
+    etag = "${md5(file("${path.root}${var.index_html_filepath}"))}"
   #etag = filemd5("path/to/file")
 }
 
 resource "aws_s3_object" "error_html" {
   bucket = aws_s3_bucket.website_bucket.bucket
   key    = "error.html"
-  source = var.error_html_filepath
+  source = ${path.root}${var.error_html_filepath}
   content_type = "text/html"
 
 
   # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
-    etag = "${md5(file(var.error_html_filepath))}"
+    etag = "${md5(file("${path.root}${var.error_html_filepath}"))}"
   #etag = filemd5("path/to/file")
 }
 
