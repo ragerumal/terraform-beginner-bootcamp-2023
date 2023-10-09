@@ -28,12 +28,12 @@ class Home
 
   # gamers-groto
   # cooker-cove
-  validates :town, presence: true, inclusion: {in : [
-    'cooker-cove'
-    'video-valley'
-    'melomaniac-mansion'
-    'the-nomad-pad'
-    'gamers-groto'
+  validates :town, presence: true, inclusion: { in: [
+    'cooker-cove',
+    'video-valley',
+    'melomaniac-mansion',
+    'the-nomad-pad',
+    'gamers-groto',
   ]}
   #visible to all users
   validates :name, presence: true
