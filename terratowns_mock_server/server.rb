@@ -3,22 +3,54 @@ require 'json'
 require 'pry'
 require 'active_model'
 
+# We will mock having a state or data base for the server 
+# by setting fglobal avriable. you never use global variable in prouduction server
 $home = {}
 
+# This is a ruby class that includes valaidation from Active records.
+# this will represent our home resources as a ruby objects.
 class Home
+  #Active models is part of Ruby on rails.
+  # it is used as an ORM , It has module within.
+  # Active model that provides validations.
+  # This production Terratowns serber is rails and uses
+  # Very similar and in most cases identical validation
+  # https://guides.rubyonrails.org/active_model_basics.html
   include ActiveModel::Validations
+  
+  #Create some virtual attributes to stored on this object
+  # This will set a getter and setter
+  # eg
+  # home = new Home ()
+  # home.town =`hello` #setter
+  # home.town() #getter
   attr_accessor :town, :name, :description, :domain_name, :content_version
 
-  validates :town, presence: true
+  # gamers-groto
+  # cooker-cove
+  validates :town, presence: true, inclusion: {in : [
+    'cooker-cove'
+    'video-valley'
+    'melomaniac-mansion'
+    'the-nomad-pad'
+    'gamers-groto'
+  ]}
+  #visible to all users
   validates :name, presence: true
+  #visible to all users
   validates :description, presence: true
+  # We want to lock this down to only be from cloud front
   validates :domain_name, 
     format: { with: /\.cloudfront\.net\z/, message: "domain must be from .cloudfront.net" }
     # uniqueness: true, 
 
+    #Content version has to be integer
+    # we will amek sure it an incremental version in the controller
   validates :content_version, numericality: { only_integer: true }
 end
 
+# we are extending a class from sinatra::Base to 
+#turn this generic class to utilize to sinatra web framework
 class TerraTownsMockServer < Sinatra::Base
 
   def error code, message
@@ -185,4 +217,5 @@ class TerraTownsMockServer < Sinatra::Base
   end
 end
 
+# This is what will run the server
 TerraTownsMockServer.run!
