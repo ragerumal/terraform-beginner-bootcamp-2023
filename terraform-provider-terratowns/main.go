@@ -27,6 +27,13 @@ func main() {
     fmt.Println("Hello, World!")
 }
 
+type Config struct {
+	Endpoint string
+	Token string
+	UserUuid string
+}
+
+
 // In golang , a title case func will be exportdd
 func Provider() *schema.Provider {
     var p *schema.Provider
@@ -62,11 +69,6 @@ func Provider() *schema.Provider {
 
 }
 
-type Config struct {
-	Endpoint string
-	Token string
-	UserUuid string
-}
 
 func validateUUID(v interface{}, k string) (ws []string, errors []error) {
     log.Print("validateUUID:Start")
