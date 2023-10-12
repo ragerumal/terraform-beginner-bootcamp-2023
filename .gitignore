@@ -10,7 +10,6 @@ crash.log
 crash.*.log
 
 terraform-provider-terratowns/terraform-provider-terratowns_v*
-terraformrc
 .terraformrc
 .terraform.lock.hcl
 terraform-provider-terratowns_v*
