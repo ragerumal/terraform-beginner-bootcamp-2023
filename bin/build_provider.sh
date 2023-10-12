@@ -2,12 +2,12 @@
 
 #https://servian.dev/terraform-local-providers-and-registry-mirror-configuration-b963117dfffa
 
-PLUGIN_DIR="~/.terraform.d/plugins/local.providers/local/terratowns/1.0.0/"
-PLUGIN_NAME="terraform-provider-terratown_v1.0.0"
+PLUGIN_DIR="/home/gitpod/.terraform.d/plugins/local.providers/local/terratowns/1.0.0/"
+PLUGIN_NAME="terraform-provider-terratowns_v1.0.0"
 
 cd $PROJECT_ROOT/terraform-provider-terratowns
 cp $PROJECT_ROOT/terraformrc /home/gitpod/.terraformrc
-rm -rf ~/.terraform.d/plugins
+rm -rf /home/gitpod/.terraform.d/plugins
 rm -rf $PROJECT_ROOT/.terraform
 rm -rf $PROJECT_ROOT/.terraform.lock.hcl
 go build -o $PLUGIN_NAME
