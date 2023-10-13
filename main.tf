@@ -23,19 +23,22 @@ terraform {
 }
 
 provider "terratowns" {
-  endpoint = "http://localhost:4567/api"
-  user_uuid="e328f4ab-b99f-421c-84c9-4ccea042c7d1" 
-  token="9b49b3fb-b8e9-483c-b703-97ba88eef8e0"
+  endpoint = var.terratowns_endpoint
+  user_uuid = var.teacherseat_user_uuid
+  token = var.terratowns_access_token
+  # endpoint = "https://terratowns.cloud/api"
+  # user_uuid="f511f11f-1d11-44ed-8359-db2f89e317e7" 
+  # token="e2868a92-5a0b-402b-b1f7-ef58d0a799ea"
 }
-# module "terrahouse_aws" {
-#   source = "./modules/terrahouse_aws"
-#   user_uuid= var.user_uuid
-#   bucket_name = var.bucket_name
-#   error_html_filepath = var.error_html_filepath
-#   index_html_filepath = var.index_html_filepath
-#   content_version=var.content_version
-#   assets_path = var.assets_path
-# }
+module "terrahouse_aws" {
+  source = "./modules/terrahouse_aws"
+  user_uuid= var.teacherseat_user_uuid
+  bucket_name = var.bucket_name
+  error_html_filepath = var.error_html_filepath
+  index_html_filepath = var.index_html_filepath
+  content_version=var.content_version
+  assets_path = var.assets_path
+}
 
 resource "terratowns_home" "home" {
   name = "How to play Arcanum in 2023!"
@@ -45,8 +48,9 @@ Modders have removed all the originals making this game really fun
 to play (despite that old look graphics). This is my guide that will
 show you how to play arcanum without spoiling the plot.
 DESCRIPTION
-  domain_name = "3ddeedg.cloudfront.net"
-  town = "gamers-groto"
+  domain_name = module.terrahouse_aws.cloudfront_url
+  #domain_name = "3ddeedg.cloudfront.net"
+  town = "missingo"
   content_version = 1
 }
 
