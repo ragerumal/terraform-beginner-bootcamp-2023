@@ -33,7 +33,6 @@ provider "terratowns" {
 module "home_arcanum_hosting" {
   source = "./modules/terrahouse_aws"
   user_uuid= var.teacherseat_user_uuid
-  bucket_name = var.bucket_name
   public_path = var.arcanum.public_path
   content_version=var.arcanum.content_version
 }
@@ -55,7 +54,6 @@ DESCRIPTION
 module "home_biryani_hosting" {
   source = "./modules/terrahouse_aws"
   user_uuid= var.teacherseat_user_uuid
-  bucket_name = var.bucket_name
   public_path = var.biryani.public_path
   content_version=var.biryani.content_version
 }

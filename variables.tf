@@ -10,10 +10,10 @@ variable "terratowns_access_token" {
   type        = string
 
 }
-variable "bucket_name" {
-  type        = string
+# variable "bucket_name" {
+#   type        = string
 
-}
+# }
 
 variable "arcanum" {
   type = object({

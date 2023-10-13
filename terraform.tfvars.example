@@ -1,5 +1,5 @@
 terratowns_endpoint="https://terratowns.cloud/api"
-bucket_name="xglpq2m43z5jrt65666aprk4n992yhqg"
+#bucket_name="xglpq2m43z5jrt65666aprk4n992yhqg"
 arcanum = {
     public_path="/workspace/terraform-beginner-bootcamp-2023/public/arcanum"
     content_version=1
