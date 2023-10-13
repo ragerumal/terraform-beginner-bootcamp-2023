@@ -47,7 +47,7 @@ show you how to play arcanum without spoiling the plot.
 DESCRIPTION
   domain_name = module.home_arcanum_hosting.cloudfront_url
   #domain_name = "3ddeedg.cloudfront.net"
-  town = "missingo"
+  town = "gamers-grotto"
   content_version = var.arcanum.content_version
 }
 
@@ -64,7 +64,7 @@ Since i like biryani so much , so i decided to put on this recipe to the world.
 DESCRIPTION
   domain_name = module.home_biryani_hosting.cloudfront_url
   #domain_name = "3ddeedg.cloudfront.net"
-  town = "missingo"
+  town = "cooker-cove"
   content_version = var.biryani.content_version
 }
 
