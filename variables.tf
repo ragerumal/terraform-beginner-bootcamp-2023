@@ -10,23 +10,21 @@ variable "terratowns_access_token" {
   type        = string
 
 }
-variable "bucket_name" {
-  type        = string
+# variable "bucket_name" {
+#   type        = string
 
+# }
+
+variable "arcanum" {
+  type = object({
+    public_path = string
+    content_version = number
+  })
 }
 
-variable "index_html_filepath" {
-  type        = string
-}
-
-variable "error_html_filepath" {
-  type        = string
-}
-
-variable "content_version" {
-  type        = number
-}
-
-variable "assets_path" {
-  type        = string
+variable "biryani" {
+  type = object({
+    public_path = string
+    content_version = number
+  })
 }

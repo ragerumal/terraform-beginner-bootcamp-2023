@@ -7,34 +7,22 @@ variable "user_uuid" {
   }
 }
 
-variable "bucket_name" {
-  description = "AWS S3 Bucket Name"
-  type        = string
-  validation {
-    condition     = can(regex("^[a-z0-9.-]{3,63}$", var.bucket_name))
-    error_message = "Invalid S3 bucket name. It should be between 3 and 63 characters long and only contain lowercase letters, numbers, hyphens, and periods."
-  }
-}
+# variable "bucket_name" {
+#   description = "AWS S3 Bucket Name"
+#   type        = string
+#   validation {
+#     condition     = can(regex("^[a-z0-9.-]{3,63}$", var.bucket_name))
+#     error_message = "Invalid S3 bucket name. It should be between 3 and 63 characters long and only contain lowercase letters, numbers, hyphens, and periods."
+#   }
+# }
 
-variable "index_html_filepath" {
-  description = "Path to the index.html file"
-  type        = string
-
-  validation {
-    condition     = can(file(var.index_html_filepath))
-    error_message = "The specified index_html_filepath does not exist or is invalid."
-  }
-}
-
-variable "error_html_filepath" {
-  description = "Path to the error.html file"
+variable "public_path" {
+  description = "the file path to public directory"
   type        = string
 
-  validation {
-    condition     = can(file(var.error_html_filepath))
-    error_message = "The specified error_html_filepath does not exist or is invalid."
-  }
+  
 }
+
 
 
 variable "content_version" {
@@ -45,9 +33,4 @@ variable "content_version" {
     condition     = var.content_version >= 1 && floor(var.content_version) == var.content_version
     error_message = "Content version must be a positive integer starting from 1."
   }
-}
-
-variable "assets_path" {
-  description = "Path to assets folder"
-  type        = string
 }

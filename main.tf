@@ -13,12 +13,12 @@ terraform {
   #     name = "terra-house-1"
   #   } 
 
-#   cloud {
-#     organization = "TerraformTrainingRaghuerumal"
-#     workspaces {
-#       name = "terra-house-1"
-#     }
-#   }
+  cloud {
+    organization = "TerraformTrainingRaghuerumal"
+    workspaces {
+      name = "terra-house-1"
+    }
+  }
   
 }
 
@@ -30,17 +30,14 @@ provider "terratowns" {
   # user_uuid="f511f11f-1d11-44ed-8359-db2f89e317e7" 
   # token="e2868a92-5a0b-402b-b1f7-ef58d0a799ea"
 }
-module "terrahouse_aws" {
+module "home_arcanum_hosting" {
   source = "./modules/terrahouse_aws"
   user_uuid= var.teacherseat_user_uuid
-  bucket_name = var.bucket_name
-  error_html_filepath = var.error_html_filepath
-  index_html_filepath = var.index_html_filepath
-  content_version=var.content_version
-  assets_path = var.assets_path
+  public_path = var.arcanum.public_path
+  content_version=var.arcanum.content_version
 }
 
-resource "terratowns_home" "home" {
+resource "terratowns_home" "home_arcanum" {
   name = "How to play Arcanum in 2023!"
   description = <<DESCRIPTION
 Arcanum is a game from 2001 that shipped with alot of bugs.
@@ -48,10 +45,26 @@ Modders have removed all the originals making this game really fun
 to play (despite that old look graphics). This is my guide that will
 show you how to play arcanum without spoiling the plot.
 DESCRIPTION
-  domain_name = module.terrahouse_aws.cloudfront_url
+  domain_name = module.home_arcanum_hosting.cloudfront_url
   #domain_name = "3ddeedg.cloudfront.net"
   town = "missingo"
-  content_version = 1
+  content_version = var.arcanum.content_version
 }
 
+module "home_biryani_hosting" {
+  source = "./modules/terrahouse_aws"
+  user_uuid= var.teacherseat_user_uuid
+  public_path = var.biryani.public_path
+  content_version=var.biryani.content_version
+}
+resource "terratowns_home" "home_biryani" {
+  name = "Recipe for Biryani"
+  description = <<DESCRIPTION
+Since i like biryani so much , so i decided to put on this recipe to the world.
+DESCRIPTION
+  domain_name = module.home_biryani_hosting.cloudfront_url
+  #domain_name = "3ddeedg.cloudfront.net"
+  town = "missingo"
+  content_version = var.biryani.content_version
+}
 
